@@ -40,7 +40,7 @@ class Solution {
            because those meetings can not be taken into the answer */
           while(!pq.empty() && pq.top() < d) pq.pop();
       }
-      return (cnt);
+      return cnt;
         
     }
 };
