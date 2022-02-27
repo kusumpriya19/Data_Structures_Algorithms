@@ -29,6 +29,8 @@ public:
         return ans;
     }
 };
+// tc - o(n2)
+// sc - o(n)
 
 // { Driver Code Starts.
 
