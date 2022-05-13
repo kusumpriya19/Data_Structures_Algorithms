@@ -12,28 +12,34 @@ class Solution {
 public:
     vector<int> maximizeArray(int arr1[], int arr2[], int n) {
             // code here 
-             set<int> st;
-          vector<int> v;
-          for(int i=0;i<n;i++){
-              st.insert(arr1[i]);
-              st.insert(arr2[i]);
-          }
-          while(st.size()>n){
-              st.erase(*st.begin());
-          }
-          for(int i=0;i<n;i++){
-              if(st.find(arr2[i])!=st.end()){
-                  v.push_back(arr2[i]);
-                  st.erase(arr2[i]);
-              }
-          }
-          for(int i=0;i<n;i++){
-              if(st.find(arr1[i])!=st.end()){
-                  v.push_back(arr1[i]);
-                  st.erase(arr1[i]);
-              }
-          }
-          return v;
+            set<int> st;
+            vector<int> v;
+            for(int i=0; i<n; i++){
+                st.insert(arr1[i]);
+            }
+            for(int i=0; i<n; i++){
+                st.insert(arr2[i]);
+            }
+            int len = st.size();
+            while(st.size()>n){
+                st.erase(*st.begin());
+            }
+            for(int i=0; i<n; i++){
+                if(st.find(arr2[i]) != st.end()){
+                    v.push_back(arr2[i]);
+                    st.erase(arr2[i]);
+                    
+                }
+            }
+            for(int i=0; i<n; i++){
+                if(st.find(arr1[i]) != st.end()){
+                    v.push_back(arr1[i]);
+                    st.erase(arr1[i]);
+                    
+                }
+            }
+            
+            return v;
     }
 };
 
