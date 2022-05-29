@@ -8,7 +8,8 @@ public:
 //             return "1";
         
         string ans = "1";
-        while(--n){
+        n--;
+        while(n--){
             string curr = "";
             for(int i=0; i<ans.size(); i++){
                 int count = 1;
