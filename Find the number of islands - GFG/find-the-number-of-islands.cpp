@@ -14,14 +14,15 @@ class Solution {
         return;
         
         vis[i][j] = 1;
-        dfs(grid,vis,i+1,j,n,m);
-        dfs(grid,vis,i,j+1,n,m);
-        dfs(grid,vis,i+1,j+1,n,m);
-        dfs(grid,vis,i-1,j,n,m);
-        dfs(grid,vis,i,j-1,n,m);
-        dfs(grid,vis,i+1,j-1,n,m);
-        dfs(grid,vis,i-1,j+1,n,m);
-        dfs(grid,vis,i-1,j-1,n,m);
+        
+        int dir[8][2] = {{0,1},{1,0},{1,1},{-1,0},{0,-1},{-1,-1},{-1,1},{1,-1}};
+        
+        for(int p=0; p<8; p++){
+            int x = dir[p][0] + i;
+            int y = dir[p][1] + j;
+            
+            dfs(grid,vis,x,y,n,m);
+        }
         
     }
     
