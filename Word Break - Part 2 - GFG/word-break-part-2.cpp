@@ -10,9 +10,9 @@ using namespace std;
 class Solution{
 public:
     
-    void solve(vector<string> &ans, map<string,int> &mp, string temp, int n, string s){
+    void solve(vector<string> &ans, map<string,int> &mp, string temp, string s){
         if(s.length()==0){
-            temp.pop_back();
+            temp.pop_back(); // to remove that extra " " space
             ans.push_back(temp);
             return;
         }
@@ -21,7 +21,7 @@ public:
             string check = s.substr(0,i+1);
             if(mp[check]>0){
                 check += ' ';
-                solve(ans,mp,temp+check,n,s.substr(i+1));
+                solve(ans,mp,temp+check,s.substr(i+1));
                 
             }
         }
@@ -30,12 +30,12 @@ public:
     vector<string> wordBreak(int n, vector<string>& dict, string s)
     {
         vector<string> ans;
-        string k;
+        
         map<string,int> mp;
         for(int i=0; i<dict.size(); i++){
             mp[dict[i]]++;
         }
-        solve(ans,mp,"",n,s);
+        solve(ans,mp,"",s);
         return ans;
     }
 };
