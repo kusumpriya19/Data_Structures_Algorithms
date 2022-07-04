@@ -9,27 +9,34 @@ using namespace std;
 
 class Solution{
 public:
-int t[101][101];
-   int solve(int arr[],int i,int j){
-       if(i>=j) return 0;
-       if(t[i][j]!=-1){
-           return t[i][j];
-       }
-       int mn = INT_MAX;
-       for(int k=i;k<j;k++){
-           int temp = solve(arr,i,k) + solve(arr,k+1,j) + arr[i-1]*arr[k]*arr[j];
-           
-           mn = min(temp,mn);
-       }
-       
-       t[i][j]= mn;
-       
-       return t[i][j];
-   }
-    int matrixMultiplication(int N, int arr[])
+
+   
+    int matrixMultiplication(int n, int p[])
     {
-        memset(t,-1,sizeof(t));
-       solve(arr,1,N-1);
+        int m[n][n];
+        for (int i = 1; i < n; i++)
+        m[i][i] = 0;
+ 
+    // L is chain length.
+    for (int L = 2; L < n; L++)
+    {
+        for (int i = 1; i < n - L + 1; i++)
+        {
+            int j = i + L - 1;
+            m[i][j] = INT_MAX;
+            for (int k = i; k <= j - 1; k++)
+            {
+                // q = cost/scalar multiplications
+               int q = m[i][k] + m[k + 1][j]
+                    + p[i - 1] * p[k] * p[j];
+                if (q < m[i][j])
+                    m[i][j] = q;
+            }
+        }
+    }
+ 
+    return m[1][n - 1];
+    
     }
 };
 
