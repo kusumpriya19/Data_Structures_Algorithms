@@ -9,15 +9,18 @@ public:
 const int mod = 1e9+7;
     int countFriendsPairings(int n) 
     { 
-        // code here
-        long long int dp[n+1];
-        for(int i=0; i<n+1; i++){
-            if(i<=2)
-            dp[i] = i;
-            else
-            dp[i] = (dp[i-1]%mod+ ((i-1)*dp[i-2])%mod)%mod;
+        // code here // tc - o(n) sc - o(1)
+        long long a = 1, b=2, c=0;
+        if(n<=2)
+        return n;
+        
+        for(int i=3; i<n+1; i++){
+            c = (b+(i-1)*a)%mod;
+            a=b;
+            b=c;
         }
-        return dp[n];
+        return c%mod;
+       
     }
 };    
  
