@@ -9,21 +9,30 @@ class Solution
 {
     public:
     //Function to find length of longest increasing subsequence.
+    int solve(int ind, int n, int a[], int prev, int dp[]){
+        if(ind==n)
+        return 0;
+        if(dp[prev+1] != -1)
+        return dp[prev+1];
+        
+        if(prev == -1 || a[ind]>a[prev]){
+            int with = 1+solve(ind+1,n,a,ind,dp);
+            
+            int without = solve(ind+1,n,a,prev,dp);
+            return dp[prev+1] = max(with,without);
+        }
+        else
+        return dp[prev+1] = solve(ind+1,n,a,prev,dp);
+    }
+    
     int longestSubsequence(int n, int a[])
     {
+        int dp[n+1];
+        memset(dp,-1, sizeof dp);
+        return solve(0,n,a,-1,dp);
+        
        // your code here
-       vector<int> v;
-       v.push_back(a[0]);
-       for(int i=1; i<n; i++){
-           if(a[i]>v.back()){
-               v.push_back(a[i]);
-           }
-           else {
-               int ind = lower_bound(v.begin(), v.end(), a[i])-v.begin();
-               v[ind] = a[i];
-           }
-       }
-       return v.size();
+       
     }
 };
 
