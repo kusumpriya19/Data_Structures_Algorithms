@@ -16,12 +16,8 @@ public:
         sort(vp.begin(), vp.end());
         int cnt = 0;
         for(int i=0; i<n; i++){
-            while(vp[i].second--){
-                if(vp[i].first <= k){
-                    cnt++;
-                    k -= vp[i].first;
-                }
-            }
+            cnt += min(vp[i].second, k/vp[i].first);
+            k -= (min(vp[i].second, k/vp[i].first)) * (vp[i].first);
         }
         return cnt;
     }
