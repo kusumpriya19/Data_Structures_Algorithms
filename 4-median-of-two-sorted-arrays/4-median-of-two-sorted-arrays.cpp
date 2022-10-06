@@ -1,29 +1,24 @@
 class Solution {
 public:
     double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
-        int len1 = nums1.size();
-        int len2 = nums2.size();
-        
-        int comb_len = len1+len2;
-        vector<int> comb;
-        for(int i=0; i<nums1.size(); i++){
-            comb.push_back(nums1[i]);
-        }
-        for(int j=0; j<nums2.size(); j++){
-            comb.push_back(nums2[j]);
-        }
-        sort(comb.begin(), comb.end());
-        int a = comb_len/2;
-        if(comb_len%2 == 0){
-            
-            double ans = comb[a]+comb[a-1];
-            ans = ans/2;
-            return ans;
-        }
-        else{
-            double ans = comb[a];
-            return ans;
-        }
-        return 0;
+        int N1 = nums1.size();
+int N2 = nums2.size();
+if (N1 < N2) return findMedianSortedArrays(nums2, nums1);
+
+int lo = 0, hi = N2 * 2;
+while (lo <= hi) {
+    int mid2 = (lo + hi) / 2;   
+    int mid1 = N1 + N2 - mid2;  
+    
+    double L1 = (mid1 == 0) ? INT_MIN : nums1[(mid1-1)/2];	
+    double L2 = (mid2 == 0) ? INT_MIN : nums2[(mid2-1)/2];
+    double R1 = (mid1 == N1 * 2) ? INT_MAX : nums1[(mid1)/2];
+    double R2 = (mid2 == N2 * 2) ? INT_MAX : nums2[(mid2)/2];
+    
+    if (L1 > R2) lo = mid2 + 1;		
+    else if (L2 > R1) hi = mid2 - 1;	
+    else return (max(L1,L2) + min(R1, R2)) / 2;	
+}
+return -1;
     }
 };
