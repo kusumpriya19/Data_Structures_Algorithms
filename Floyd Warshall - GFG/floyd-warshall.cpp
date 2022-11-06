@@ -9,7 +9,7 @@ using namespace std;
 
 class Solution {
   public:
-	void shortest_distance(vector<vector<int>>&matrix){
+	void shortest_distance(vector<vector<int>> &matrix){
 	    // Code here
 	    //at any point k, matrix[i][j] stores min cost to reach from i to j via k intermediate nodes
     int v=matrix.size();
